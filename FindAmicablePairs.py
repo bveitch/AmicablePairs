@@ -50,7 +50,7 @@ def divisor_dict(n,sum_of_divisors_fn):
     return dict(zip(candidates, sigmas))
         
         
-n=100000
+n=1000000
 list_of_primes=prime_sieve(n)
 sigma_fn=partial(sum_of_divisors,list_of_primes)
 sigma_dict=divisor_dict(n,sigma_fn)
@@ -59,10 +59,15 @@ for i,s in sigma_dict.items():
     if(s,i) in sigma_dict.items():
         if(i < s): 
             amicables.append([i,s])
-print('The amicable pairs less than {} are'.format(n))
 
+outF = open("listAmicablePairs.txt", "w") 
+outF.write('The amicable pairs less than {} are'.format(n))
+outF.write("\n")
 for i,j in amicables:
-    print((i,j))
+   print((i,j))  
+   outF.write(' {:} , {:}'.format(i,j))
+   outF.write("\n")
+outF.close()
 
             
     
