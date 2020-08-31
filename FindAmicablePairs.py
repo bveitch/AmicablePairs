@@ -7,8 +7,7 @@ author      : bveitch
 version     : 1.0
 project     : AmicablePairs
 
-An amicable pair is a pair of integers m,n such that
-the sum of proper divisors (ie excluding the number itself) of one number in the pair, is equal to the other.
+An amicable pair is a pair of integers m,n such that the sum of proper divisors (ie excluding the number itself) of one number in the pair is equal to the other.
 Ie 
 
 s(m)=n, s(n)=m,
