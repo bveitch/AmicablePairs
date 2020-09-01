@@ -16,6 +16,7 @@ where s(n) denotes the sum of proper divisors.
 """
 
 from functools import partial
+import math 
 
 def prime_sieve(n):
     primes=[True]*n
@@ -40,7 +41,8 @@ def sum_of_divisors(list_of_primes,n):
             sigma*=((p**mult_p)-1)
             sigma/=(p-1)
     if(m > 1):
-        sigma+=m
+        sigma*=(m+1)
+        
     return (int(sigma) - n) 
 
 def divisor_dict(n,sum_of_divisors_fn):
@@ -49,10 +51,11 @@ def divisor_dict(n,sum_of_divisors_fn):
     return dict(zip(candidates, sigmas))
         
         
-n=1000000
+N=1000000
+n=math.ceil(math.sqrt(N))
 list_of_primes=prime_sieve(n)
 sigma_fn=partial(sum_of_divisors,list_of_primes)
-sigma_dict=divisor_dict(n,sigma_fn)
+sigma_dict=divisor_dict(N,sigma_fn)
 amicables=[]
 for i,s in sigma_dict.items():
     if(s,i) in sigma_dict.items():
@@ -60,7 +63,7 @@ for i,s in sigma_dict.items():
             amicables.append([i,s])
 
 outF = open("listAmicablePairs.txt", "w") 
-outF.write('The amicable pairs less than {} are'.format(n))
+outF.write('The amicable pairs less than {} are'.format(N))
 outF.write("\n")
 for i,j in amicables:
    print((i,j))  
