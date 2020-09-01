@@ -39,3 +39,4 @@ The amicable pairs less than 1000000 are
  802725 , 863835
  879712 , 901424
  898216 , 980984
+Runtime was 38.360s
