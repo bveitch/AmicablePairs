@@ -45,8 +45,8 @@ vector<intType> prime_sieve(size_t n)
         if(*pflag == true)
         {
             primes.push_back(i);
-            for(auto j = i*i; j < flags.size()+1; j+=i){
-                flags[j-1]=false;
+            for(auto j = i*i - 1; j < flags.size(); j+=i){
+                flags[j]=false;
             }
         }
         i++;
@@ -95,7 +95,7 @@ map<intType,intType> build_divisor_map(intType N){
     map<intType,intType> map;
 
     // create map
-    transform(ints.begin(), ints.end(), sums.begin(), inserter(map, map.end()), [](int a, int b)
+    transform(ints.begin(), ints.end(), sums.begin(), inserter(map, map.end()), [](auto a, auto b)
     {
         return make_pair(a, b);
     });
@@ -120,13 +120,13 @@ vector< pair<intType,intType> > get_amicable_pairs(intType N){
                 amicables.push_back(i_sigma);
             }
         }
-	}
+    }
 
     return amicables; 
 }
 int main (int argc, char *argv[]) { 
     
-    int32_t N=atoi(argv[1]);
+    uint64_t N=atoi(argv[1]);
     
     auto start = high_resolution_clock::now();
 
