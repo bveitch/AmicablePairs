@@ -14,7 +14,7 @@ using namespace std;
 using namespace std::chrono; 
 using namespace std::placeholders; 
 
-"""
+/**
 Created on Fri Sep 04 2020
 description : Find amicable pairs less than n
 author      : bveitch
@@ -27,10 +27,11 @@ Ie
 s(m)=n, s(n)=m,
 
 where s(n) denotes the sum of proper divisors.
-"""
 
-//Programs should be linked with the libgmpxx and libgmp libraries. For example,
-//g++ mycxxprog.cc -std=c++14 -lgmpxx -lgmp
+Program should be linked with the libgmpxx and libgmp libraries. For example,
+>g++ mycxxprog.cc -std=c++14 -lgmpxx -lgmp
+
+*/
 
 template<typename intType>
 vector<intType> prime_sieve(size_t n)
@@ -56,11 +57,11 @@ vector<intType> prime_sieve(size_t n)
 template<typename intType>
 int sum_of_divisors(intType n , const vector<intType> & primes){
     auto m=n;
-    auto sigma = 1UL;
+    auto sigma = static_cast<intType>(1UL);
     for(const auto& p :primes)
     {
         if(m == 1) break;
-        auto mult_p=static_cast<intType>(1UL);
+        auto mult_p = static_cast<intType>(1UL);
         while( m % p == static_cast<intType>(0UL) )
         {
             m/=p;
@@ -83,18 +84,20 @@ map<intType,intType> build_divisor_map(intType N){
      
     auto list_of_primes = prime_sieve<intType>(n);
 
-    auto fn_sum_divisors = std::bind (sum_of_divisors<intType>,_1,list_of_primes); 
+    auto fn_sum_divisors = bind(sum_of_divisors<intType>,_1,list_of_primes); 
+    
     vector<intType> ints(N);
     vector<intType> sums(N);
+    
     iota (begin(ints), end(ints), 2); 
-    std::transform(ints.begin(), ints.end(), sums.begin(), fn_sum_divisors);
+    transform(ints.begin(), ints.end(), sums.begin(), fn_sum_divisors);
 
-    std::map<intType,intType> map;
+    map<intType,intType> map;
 
     // create map
-    std::transform(ints.begin(), ints.end(), sums.begin(), std::inserter(map, map.end()), [](int a, int b)
+    transform(ints.begin(), ints.end(), sums.begin(), inserter(map, map.end()), [](int a, int b)
     {
-        return std::make_pair(a, b);
+        return make_pair(a, b);
     });
     return map;
 }
@@ -122,8 +125,8 @@ vector< pair<intType,intType> > get_amicable_pairs(intType N){
     return amicables; 
 }
 int main (int argc, char *argv[]) { 
-
-	int32_t N=atoi(argv[1]);
+    
+    int32_t N=atoi(argv[1]);
     
     auto start = high_resolution_clock::now();
 
@@ -142,4 +145,4 @@ int main (int argc, char *argv[]) {
     outfile << "Runtime was " << duration.count() << " seconds\n" ;
     outfile.close();
 	return 0;
- }
+}
