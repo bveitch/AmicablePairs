@@ -29,13 +29,14 @@ s(m)=n, s(n)=m,
 where s(n) denotes the sum of proper divisors.
 
 Program should be linked with the libgmpxx and libgmp libraries. For example,
->g++ mycxxprog.cc -std=c++14 -lgmpxx -lgmp
+>g++ mycxxprog.cc  -lgmpxx -lgmp
 
 */
 
 template<typename intType>
 vector<intType> prime_sieve(size_t n)
-{
+{ 
+    std::cerr << "here" << std::endl;
     vector<bool> flags(n,true);
     flags[0]=false;
     auto i = static_cast<intType>(1UL);
@@ -83,7 +84,7 @@ map<intType,intType> build_divisor_map(intType N){
     auto n=ceil(sqrt(N));
      
     auto list_of_primes = prime_sieve<intType>(n);
-
+     std::cerr << "here" << std::endl;
     auto fn_sum_divisors = bind(sum_of_divisors<intType>,_1,list_of_primes); 
     
     vector<intType> ints(N);
@@ -122,16 +123,21 @@ vector< pair<intType,intType> > get_amicable_pairs(intType N){
         }
     }
 
-    return amicables; 
+    return amicables;
 }
 int main (int argc, char *argv[]) { 
+
+    if(argc!=2){
+        std::cerr << "Provide one integer argument" << std::endl;
+        exit(0);
+    }
     
     uint64_t N=atoi(argv[1]);
     
     auto start = high_resolution_clock::now();
 
     auto amicables = get_amicable_pairs(N);
-    
+
     auto stop = high_resolution_clock::now(); 
   
     auto duration = duration_cast<seconds>(stop - start);
