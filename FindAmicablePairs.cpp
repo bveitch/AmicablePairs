@@ -3,7 +3,7 @@
 #include <cmath>
 #include <climits>
 #include <vector>
-#include <map>
+#include <unordered_map>
 #include <numeric> 
 #include <algorithm>  
 #include <functional> 
@@ -36,7 +36,6 @@ Program should be linked with the libgmpxx and libgmp libraries. For example,
 template<typename intType>
 vector<intType> prime_sieve(size_t n)
 { 
-    std::cerr << "here" << std::endl;
     vector<bool> flags(n,true);
     flags[0]=false;
     auto i = static_cast<intType>(1UL);
@@ -80,11 +79,10 @@ int sum_of_divisors(intType n , const vector<intType> & primes){
 }
 
 template<typename intType>
-map<intType,intType> build_divisor_map(intType N){
+unordered_map<intType,intType> build_divisor_map(intType N){
     auto n=ceil(sqrt(N));
      
     auto list_of_primes = prime_sieve<intType>(n);
-     std::cerr << "here" << std::endl;
     auto fn_sum_divisors = bind(sum_of_divisors<intType>,_1,list_of_primes); 
     
     vector<intType> ints(N);
@@ -93,7 +91,7 @@ map<intType,intType> build_divisor_map(intType N){
     iota (begin(ints), end(ints), 2); 
     transform(ints.begin(), ints.end(), sums.begin(), fn_sum_divisors);
 
-    map<intType,intType> map;
+    unordered_map<intType,intType> map;
 
     // create map
     transform(ints.begin(), ints.end(), sums.begin(), inserter(map, map.end()), [](auto a, auto b)
