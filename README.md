@@ -10,13 +10,13 @@ where s(n) denotes the sum of proper divisors.
 
 If &sigma;(n) denotes the sum of all divisors of a number (ie including the number itself) and 
 
-n = Product_{p=primes dividing n} (p^a_p),
+n = &Pi;_{p=primes dividing n} (p^a_p),
 
 where a_p is the multiplicity of p as a divisor of n, then,
 
-&sigma(n)=Product_{p=primes dividing n} (p^(a_p+1) -1)/(p-1),
+&sigma;(n)=&Pi;_{p=primes dividing n} (p^(a_p+1) -1)/(p-1),
 
-and s(n) = &sigma(n)-n.
+and s(n) = &sigma;(n)-n.
 
 So, given a list of primes (say, using sieve of Erathothenes), computing s(n) can be relatively efficient.
 
