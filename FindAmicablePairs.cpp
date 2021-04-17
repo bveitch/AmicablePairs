@@ -136,7 +136,7 @@ int main (int argc, char *argv[]) {
     auto start = high_resolution_clock::now();
 
     auto amicables = get_amicable_pairs(N);
-    
+    //map to order the pairs for printing:
     map<uint64_t,uint64_t> outmap;
 
     for(const auto& apair: amicables){
