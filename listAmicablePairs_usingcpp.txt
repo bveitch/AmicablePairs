@@ -12,4 +12,4 @@ The amicable pairs less than 100000 are:
  (67095,71145)
  (69615,87633)
  (79750,88730)
-Runtime was 167188 seconds
+Runtime was 169237 microseconds
