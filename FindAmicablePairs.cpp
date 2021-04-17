@@ -4,6 +4,7 @@
 #include <climits>
 #include <vector>
 #include <unordered_map>
+#include <map>
 #include <numeric> 
 #include <algorithm>  
 #include <functional> 
@@ -135,18 +136,25 @@ int main (int argc, char *argv[]) {
     auto start = high_resolution_clock::now();
 
     auto amicables = get_amicable_pairs(N);
+    
+    map<uint64_t,uint64_t> outmap;
+
+    for(const auto& apair: amicables){
+       outmap[apair.first] = apair.second;
+    }
 
     auto stop = high_resolution_clock::now(); 
   
-    auto duration = duration_cast<seconds>(stop - start);
+    auto duration = duration_cast<microseconds>(stop - start);
     
     ofstream outfile;
     outfile.open ("listAmicablePairs_usingcpp.txt");
     outfile << "The amicable pairs less than " <<  N << " are: \n";
-    for(const auto& apair: amicables){
+    
+    for(const auto& apair: outmap){
        outfile << " (" <<  apair.first << "," << apair.second << ")\n" ;
     }
-    outfile << "Runtime was " << duration.count() << " seconds\n" ;
+    outfile << "Runtime was " << duration.count() << " microseconds\n" ;
     outfile.close();
-	return 0;
+    return 0;
 }
