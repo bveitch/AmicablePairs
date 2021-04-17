@@ -24,4 +24,4 @@ The code then computes a list of s(n)'s for a range of integers < n.
 
 Finally, finding amicable pairs is now an exercise in using Python's dictionary methods on {n,s(n)}.
 
-For C++ implementation an ordered_map (Hash table) is used to  give O(1) lookup time.
+For C++ implementation an unordered_map (Hash table) is used to  give O(1) lookup time.
