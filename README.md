@@ -8,7 +8,7 @@ s(m)=n, s(n)=m,
 
 where s(n) denotes the sum of proper divisors.
 
-If $\sigma(n)$ denotes the sum of all divisors of a number (ie including the number itself) and 
+If &sigma(n) denotes the sum of all divisors of a number (ie including the number itself) and 
 
 n = Product_{p=primes dividing n} (p^a_p),
 
